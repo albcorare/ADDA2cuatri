@@ -4,24 +4,22 @@ public class Carretera {
 
 	private static int numObjs = 0;
 	private Ciudad v1, v2;
-	private String nombre;
 	private Double tiempo;
 	private Double coste;
 	private int id;
 
 	public static Carretera create(Ciudad c1, Ciudad c2, String[] tokens) {
-		return new Carretera(c1, c2, tokens[2], Double.parseDouble(tokens[3]), Double.parseDouble(tokens[4]));
+		return new Carretera(c1, c2, Double.parseDouble(tokens[2]), Double.parseDouble(tokens[3]));
 	}
 
 	public static Carretera create() {
-		return new Carretera(null, null, "", null, null);
+		return new Carretera(null, null, null, null);
 	}
 
-	public Carretera(Ciudad v1, Ciudad v2, String nombre, Double tiempo, Double coste) {
+	public Carretera(Ciudad v1, Ciudad v2, Double tiempo, Double coste) {
 		super();
 		this.v1 = v1;
 		this.v2 = v2;
-		this.nombre = nombre;
 		this.tiempo = tiempo;
 		this.coste = coste;
 		id = ++numObjs;
@@ -33,10 +31,6 @@ public class Carretera {
 
 	public Ciudad getV2() {
 		return v2;
-	}
-
-	public String getNombre() {
-		return nombre;
 	}
 
 	public Double getTiempo() {
@@ -71,7 +65,7 @@ public class Carretera {
 
 	@Override
 	public String toString() {
-		return getNombre() + "(" + getTiempo() + " minutos)" + "(" + getCoste() + " euros)";
+		return  "(" + getTiempo() + " minutos)" + "(" + getCoste() + " euros)";
 	}
 
 }

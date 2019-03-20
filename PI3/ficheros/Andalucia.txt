@@ -13,6 +13,7 @@ Algeciras
 Sevilla,Huelva,A-49,92.850,15.0
 Sevilla,Cordoba,A-4,140.543,11.0
 Sevilla,Cadiz,AP-4,121.066,2.0
+Huelva,Antequera,AP-556,111.066,7.0
 Sevilla,Antequera,A-92,159.947,5.0
 Antequera,Granada,A-92,97.306,1.0
 Antequera,Malaga,A-45,51.523,85.0

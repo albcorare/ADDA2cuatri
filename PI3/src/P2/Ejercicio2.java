@@ -1,11 +1,13 @@
 package P2;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.alg.tour.HeldKarpTSP;
 import org.jgrapht.graph.SimpleWeightedGraph;
 import org.jgrapht.io.DOTExporter;
 import org.jgrapht.io.IntegerComponentNameProvider;
@@ -22,6 +24,7 @@ public class Ejercicio2 {
 		g2.edgeSet().forEach(a -> g2.setEdgeWeight(a, a.getTiempo())); // repesar aristas
 		apartadoA(g, "Huelva", "Almeria");
 		apartadoA2(g2, "Huelva", "Almeria");
+		apartadoB(g2, "Huelva");
 	}
 
 	private static void apartadoA(Graph<Ciudad, Carretera> g, String o, String d) { // jgraph
@@ -44,6 +47,18 @@ public class Ejercicio2 {
 		System.out.println("Lista de ciudades: " + gp.getVertexList());
 		System.out.println("Coste total: " + gp.getWeight());
 	}
+	private static void apartadoB(Graph<Ciudad, Carretera> g, String o) { // jgraph
+		System.out.println("----------------APARTADO B----------------");
+		HeldKarpTSP<Ciudad, Carretera> ciclo = new HeldKarpTSP<>();
+		System.out.println( ciclo.getTour(g).getVertexList());
+	}
+	
+	private static void apartadoC(Graph<Ciudad, Carretera> g, String o, List<Ciudad> lista) { // jgraph
+		System.out.println("----------------APARTADO B----------------");
+		HeldKarpTSP<Ciudad, Carretera> ciclo = new HeldKarpTSP<>();
+		System.out.println(ciclo.getTour(g).getVertexList());
+	}
+	
 	
 	
 	

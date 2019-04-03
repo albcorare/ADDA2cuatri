@@ -12,5 +12,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/Grafos/lib/jgrapht-io-1.2.0.jar"/>
 	<classpathentry kind="lib" path="/Grafos/lib/jgrapht-core-1.2.0.jar"/>
+	<classpathentry kind="src" path="/Geneticos"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

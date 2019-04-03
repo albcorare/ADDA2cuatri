@@ -10,12 +10,6 @@ import us.lsi.lpsolve.solution.AlgoritmoPLI;
 import us.lsi.lpsolve.solution.SolutionPLI;
 
 
-//b0,b1
-//b0,b1-b5
-//b2,b3
-//b2,b3-b4
-//b3,b4-b5
-//b1,b4-b5
 
 
 

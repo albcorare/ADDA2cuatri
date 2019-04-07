@@ -33,7 +33,7 @@ public class TestAG {
 		ValuesInRangeChromosome<Integer> cr = ap.getBestChromosome();
 		System.out.println("================================");
 		System.out.println(cr.decode());
-		System.out.println(cr.fitness());
+		System.out.println(-cr.fitness());
 		System.out.println("================================");
 
 	}

@@ -1,11 +1,7 @@
 package P2;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
-
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
@@ -20,14 +16,14 @@ public class Ejercicio2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Graph<Ciudad, Carretera> g = cargarGrafo("./ficheros/Ejemplo.txt");
-		Graph<Ciudad, Carretera> g3 = cargarGrafo("./ficheros/Ejemplo.txt");
-		Graph<Ciudad, Carretera> g2 = cargarGrafo("./ficheros/Ejemplo.txt");
+		Graph<Ciudad, Carretera> g = cargarGrafo("./ficheros/Andalucia.txt");
+		Graph<Ciudad, Carretera> g3 = cargarGrafo("./ficheros/Andalucia.txt");
+		Graph<Ciudad, Carretera> g2 = cargarGrafo("./ficheros/Andalucia.txt");
 		
-		Ciudad c1 = new Ciudad("Lugar0");
-		Ciudad c2 = new Ciudad("Lugar1");
-		Ciudad c3 = new Ciudad("Lugar2");
-		Ciudad c4 = new Ciudad("Lugar9");
+		Ciudad c1 = new Ciudad("Sevilla");
+		Ciudad c2 = new Ciudad("Cadiz");
+		Ciudad c3 = new Ciudad("Huelva");
+		Ciudad c4 = new Ciudad("Algeciras");
 		List<Ciudad> lista = new ArrayList<>();
 		lista.add(c1);
 		lista.add(c2);
@@ -38,17 +34,17 @@ public class Ejercicio2 {
 		
 		g.edgeSet().forEach(a -> g.setEdgeWeight(a, a.getCoste())); // repesar aristas
 		g2.edgeSet().forEach(a -> g2.setEdgeWeight(a, a.getTiempo())); // repesar aristas
-		apartadoA(g, "Lugar0", "Lugar9");
-		apartadoA1(g2,"Lugar0", "Lugar9");
-		apartadoA2(g2, "Lugar7", "Lugar0");
-		apartadoA21(g2, "Lugar7", "Lugar0");
-		apartadoB(g2, "Lugar0");
+		apartadoA(g, "Sevilla", "Algeciras");
+		apartadoA1(g2,"Sevilla", "Algeciras");
+		apartadoA2(g2, "Granada", "Sevilla");
+		apartadoA21(g2, "Granada", "Sevilla");
+		apartadoB(g2, "Sevilla");
 		
 		g3.containsVertex(lista.get(1));
 		g3.containsVertex(lista.get(1));
 		g3.containsVertex(lista.get(2));
 		g3.containsVertex(lista.get(3));
-		Ciudad origen = new Ciudad("Lugar0");
+		Ciudad origen = new Ciudad("Sevilla");
 		
 		System.out.println(apartadoC(lista,g,origen));
 		System.out.println(apartadoC2(lista, g, origen));
@@ -94,49 +90,49 @@ public class Ejercicio2 {
 		System.out.println(new HeldKarpTSP().getTour(g));
 	}
 	
-	public static List<Ciudad> apartadoC(List<Ciudad> ciudades, Graph<Ciudad, Carretera> grafo, Ciudad source) {
+	public static List<Ciudad> apartadoC(List<Ciudad> c, Graph<Ciudad, Carretera> g, Ciudad s) {
 		System.out.println("----------------APARTADO C----------------");
-		for (Carretera c : grafo.edgeSet()) {
-			grafo.setEdgeWeight(c, c.getCoste());
+		for (Carretera carretera : g.edgeSet()) {
+			g.setEdgeWeight(carretera, carretera.getCoste());
 		}
-		Ciudad origen = Ciudad.create(source.getNombre());
+		Ciudad origen = Ciudad.create(s.getNombre());
 		List<Ciudad> res = new ArrayList<>();
-		for (int i = 0; i < ciudades.size(); i++) {
-			Ciudad target = ciudades.get(i);
-			DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(grafo);
+		for (int i = 0; i < c.size(); i++) {
+			Ciudad target = c.get(i);
+			DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(g);
 			res.addAll(d.getPath(origen, target).getVertexList());
 			res.remove(target);
-			origen = ciudades.get(i);
+			origen = c.get(i);
 		}
-		Ciudad target = Ciudad.create(source.getNombre());
-		DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(grafo);
+		Ciudad target = Ciudad.create(s.getNombre());
+		DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(g);
 		GraphPath<Ciudad, Carretera> path = d.getPath(origen, target);
 		res.addAll(path.getVertexList());
 		return res;
 	}
 	
 
-	public static Double apartadoC2(List<Ciudad> ciudades, Graph<Ciudad, Carretera> grafo, Ciudad source) {
-		for (Carretera c : grafo.edgeSet()) {
-			grafo.setEdgeWeight(c, c.getCoste());
+	public static Double apartadoC2(List<Ciudad> c, Graph<Ciudad, Carretera> g, Ciudad s) {
+		for (Carretera carretera : g.edgeSet()) {
+			g.setEdgeWeight(carretera, carretera.getCoste());
 		}
-		Double res2 = 0.;
-		Ciudad origen = Ciudad.create(source.getNombre());
+		Double resi = 0.;
+		Ciudad origen = Ciudad.create(s.getNombre());
 		List<Ciudad> res = new ArrayList<>();
-		for (int i = 0; i < ciudades.size(); i++) {
-			Ciudad target = ciudades.get(i);
-			DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(grafo);
+		for (int i = 0; i < c.size(); i++) {
+			Ciudad target = c.get(i);
+			DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(g);
 			res.addAll(d.getPath(origen, target).getVertexList());
 			res.remove(target);
-			origen = ciudades.get(i);
-			res2 += d.getPath(origen,target).getWeight();
+			origen = c.get(i);
+			resi  += d.getPath(origen,target).getWeight();
 		}
-		Ciudad target = Ciudad.create(source.getNombre());
-		DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(grafo);
+		Ciudad target = Ciudad.create(s.getNombre());
+		DijkstraShortestPath<Ciudad, Carretera> d = new DijkstraShortestPath<Ciudad, Carretera>(g);
 		GraphPath<Ciudad, Carretera> path = d.getPath(origen, target);
 		res.addAll(path.getVertexList());
-		res2 += path.getWeight();
-		return res2;
+		resi += path.getWeight();
+		return resi;
 	}
 	
 	//dkj
